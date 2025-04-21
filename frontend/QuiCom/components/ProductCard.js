@@ -1,13 +1,19 @@
 import React from 'react';
 import { View, Text, Image, Button, StyleSheet } from 'react-native';
+import { useCart } from '../store/CartContext';
 
 const ProductCard = ({ product }) => {
+  const { dispatch } = useCart();
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: product.image }} style={styles.image} />
       <Text>{product.name}</Text>
       <Text>₹{product.price}</Text>
-      <Button title="Add to Cart" onPress={() => {}} />
+      <Button
+        title="Add to Cart"
+        onPress={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
+      />
     </View>
   );
 };

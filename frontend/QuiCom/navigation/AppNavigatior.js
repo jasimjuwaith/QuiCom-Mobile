@@ -1,19 +1,12 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import CartScreen from '../screens/CartScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-
-const Tab = createBottomTabNavigator();
+import AuthNavigator from './AuthNavigator';
+import MainNavigator from './MainNavigator';
+import { useAuth } from '../store/AuthContext';
 
 const AppNavigator = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Cart" component={CartScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
+  const { isLoggedIn } = useAuth();
+
+  return isLoggedIn ? <MainNavigator /> : <AuthNavigator />;
 };
 
 export default AppNavigator;
